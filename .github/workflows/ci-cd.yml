@@ -13,28 +13,23 @@ jobs:
     name: 🔍 Lint & Test (Docker Compose)
     runs-on: ubuntu-latest
 
-    services:
-      docker:
-        image: docker:20.10.24-dind
-
     steps:
       - name: 📥 Checkout código
         uses: actions/checkout@v4
 
-      - name: 🐳 Set up Docker Compose
-        run: |
-          docker compose --version
+      # - name: 🐳 Instalar Docker Compose (caso necessário)
+      #   run: |
+      #     sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      #     sudo chmod +x /usr/local/bin/docker-compose
+      #     docker-compose --version
 
-      - name: 🐳 Build e subir containers
-        run: |
-          docker compose up -d --build
-          docker compose ps
+      - name: 🐳 Subir containers com docker compose
+        run: docker compose up -d --build
 
-      - name: ⏳ Aguardar serviços subirem
-        run: |
-          sleep 15
+      - name: ⏳ Aguardar banco de dados inicializar
+        run: sleep 20
 
-      - name: ✅ Rodar Lint (dentro do container app)
+      - name: ✅ Rodar Lint
         run: docker exec app_dev npm run lint
 
       - name: 🧪 Testes Unitários
@@ -67,7 +62,7 @@ jobs:
   #       with:
   #         project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-  #     - name: 🐳 Build Docker Image para produção
+  #     - name: 🐳 Build Docker Image
   #       run: |
   #         gcloud builds submit --tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/link-shortener-api
 
