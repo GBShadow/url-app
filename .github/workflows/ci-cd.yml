@@ -32,6 +32,12 @@ jobs:
           docker compose --version
 
       - name: 🐳 Build e subir containers
+        env:
+          JWT_PRIVATE_KEY: ${{ vars.JWT_PRIVATE_KEY }}
+          JWT_PUBLIC_KEY: ${{ vars.JWT_PUBLIC_KEY }}
+          DATABASE_URL: ${{ vars.DATABASE_URL }}
+          DOMAIN: ${{ vars.DOMAIN }}
+          PORT: ${{ vars.PORT }}
         run: |
           docker compose up -d --build
           docker compose ps
