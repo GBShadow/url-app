@@ -7,6 +7,9 @@ services:
       args:
         - PORT=$PORT
         - DATABASE_URL=$DATABASE_URL
+        - DOMAIN=$DOMAIN
+        - JWT_PRIVATE_KEY=$JWT_PRIVATE_KEY
+        - JWT_PUBLIC_KEY=$JWT_PUBLIC_KEY
     expose:
       - $PORT
     tty: true
