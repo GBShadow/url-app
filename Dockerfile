@@ -18,4 +18,4 @@ RUN npx prisma generate
 
 EXPOSE $PORT
 
-CMD [ "npm", "run", "dev" ]
+# CMD [ "npm", "run", "dev" ]
