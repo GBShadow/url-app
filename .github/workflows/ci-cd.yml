@@ -23,12 +23,12 @@ jobs:
 
       - name: 🐳 Set up Docker Compose
         run: |
-          docker-compose --version
+          docker compose --version
 
       - name: 🐳 Build e subir containers
         run: |
-          docker-compose up -d --build
-          docker-compose ps
+          docker compose up -d --build
+          docker compose ps
 
       - name: ⏳ Aguardar serviços subirem
         run: |
@@ -45,7 +45,7 @@ jobs:
 
       - name: 🚫 Parar containers
         if: always()
-        run: docker-compose down
+        run: docker compose down
 
   # deploy:
   #   name: 🚀 Deploy no GCP (Cloud Run)
