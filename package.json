@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "start": "node dist/server.cjs",
-    "dev": "tsx watch --env-file=.env src/server.ts",
+    "start": "node dist/cluster.cjs",
+    "dev": "tsx watch --env-file=.env src/cluster.ts",
     "docker:dev": "docker compose up --build --force-recreate --no-deps -V",
     "build": "tsup src",
     "test": "echo \"Error: no test specified\" && exit 1"
