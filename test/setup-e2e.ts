@@ -1,4 +1,4 @@
-import { config } from 'dotenv';
+import 'dotenv/config';
 
 import { envSchema } from '../src/env';
 import { PrismaClient } from '@prisma/client';
@@ -9,9 +9,6 @@ import { buildApp } from '@/server';
 
 const prisma = new PrismaClient();
 let app: FastifyTypedInstance;
-
-config({ path: '.env', override: true });
-config({ path: '.env.test', override: true });
 
 const env = envSchema.parse(process.env);
 
@@ -36,7 +33,7 @@ beforeAll(async () => {
 
   app = buildApp();
   execSync('npx prisma migrate deploy');
-  await app.listen({ port: 0 });
+  await app.listen({ port: 3333 });
 });
 
 afterAll(async () => {
