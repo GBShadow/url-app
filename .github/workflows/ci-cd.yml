@@ -7,17 +7,17 @@ on:
   pull_request:
     branches:
       - main
-
+env:
+  JWT_PRIVATE_KEY: ${{ vars.JWT_PRIVATE_KEY }}
+  JWT_PUBLIC_KEY: ${{ vars.JWT_PUBLIC_KEY }}
+  DATABASE_URL: ${{ vars.DATABASE_URL }}
+  DOMAIN: ${{ vars.DOMAIN }}
+  PORT: ${{ vars.PORT }}
 jobs:
   ci:
     name: 🔍 Lint & Test (Docker Compose)
     runs-on: ubuntu-latest
-    env:
-      JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
-      JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      DOMAIN: ${{ secrets.DOMAIN }}
-      PORT: ${{ secrets.PORT }}
+    environment: URL_APP
 
     services:
       docker:
