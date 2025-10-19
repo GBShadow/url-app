@@ -1,7 +1,6 @@
 services:
   app:
-    command: npm run dev
-    container_name: app_dev
+    container_name: app_test
     build:
       context: .
       dockerfile: Dockerfile
@@ -31,7 +30,7 @@ services:
 
   db:
     image: postgres
-    container_name: database_dev
+    container_name: database_test
     restart: always
     tty: true
     environment:

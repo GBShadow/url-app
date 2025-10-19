@@ -31,9 +31,6 @@ jobs:
         run: |
           docker compose --version
       
-      - name: 🔧 Subir containers (sem rodar dev)
-        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d --build
-
       - name: 🐳 Build e subir containers
         env:
           JWT_PRIVATE_KEY: ${{ vars.JWT_PRIVATE_KEY }}
@@ -42,7 +39,7 @@ jobs:
           DOMAIN: ${{ vars.DOMAIN }}
           PORT: ${{ vars.PORT }}
         run: |
-          docker compose up -d --build
+          docker compose -f docker-compose.test.yml up -d --build
           docker compose ps
 
       - name: ⏳ Aguardar serviços subirem
@@ -50,13 +47,13 @@ jobs:
           sleep 15
 
       - name: ✅ Rodar Lint (dentro do container app)
-        run: docker exec app_dev npm run lint
+        run: docker exec app_test npm run lint
 
       - name: 🧪 Testes Unitários
-        run: docker exec app_dev npm run test
+        run: docker exec app_test npm run test
 
       - name: 🧪 Testes End-to-End
-        run: docker exec app_dev npm run test:e2e
+        run: docker exec app_test npm run test:e2e
 
       - name: 🚫 Parar containers
         if: always()
