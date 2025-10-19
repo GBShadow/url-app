@@ -1,8 +1,8 @@
-import { AppError } from "@/errors/app-error";
-import { CreateUserDTO } from "../schema";
-import { UserRepository } from "../repositories/user.repository";
-import { StatusCodes } from "http-status-codes";
-import { compare, hash } from "bcryptjs";
+import { compare, hash } from 'bcryptjs';
+import { StatusCodes } from 'http-status-codes';
+import { UserRepository } from '../repositories/user.repository';
+import { CreateUserDTO } from '../schema';
+import { AppError } from '@/errors/app-error';
 
 export function UpdateUserService() {
   const userRepository = UserRepository();
@@ -13,8 +13,8 @@ export function UpdateUserService() {
 
       if (!user) {
         throw new AppError({
-          code: "not.found",
-          message: "User not found",
+          code: 'not.found',
+          message: 'User not found',
           statusCode: StatusCodes.NOT_FOUND,
         });
       }
@@ -23,8 +23,8 @@ export function UpdateUserService() {
         const userWithSameEmail = await userRepository.findByEmail(data.email);
         if (userWithSameEmail) {
           throw new AppError({
-            code: "duplicate.email",
-            message: "User already exist with same email",
+            code: 'duplicate.email',
+            message: 'User already exist with same email',
             statusCode: StatusCodes.CONFLICT,
           });
         }

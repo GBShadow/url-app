@@ -1,5 +1,5 @@
-import { CreateUserDTO } from "../schema";
-import { CreateUserService } from "../services/create.service";
+import { CreateUserDTO } from '../schema';
+import { CreateUserService } from '../services/create.service';
 
 export function CreateUserController() {
   return {

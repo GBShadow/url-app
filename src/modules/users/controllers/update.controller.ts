@@ -1,5 +1,5 @@
-import { UpdateUserDTO } from "../schema";
-import { UpdateUserService } from "../services/update.service";
+import { UpdateUserDTO } from '../schema';
+import { UpdateUserService } from '../services/update.service';
 
 export function UpdateUserController() {
   return {

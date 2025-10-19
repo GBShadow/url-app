@@ -1,5 +1,5 @@
-import { ShowUserDTO } from "../schema";
-import { ShowUserService } from "../services/show.service";
+import { ShowUserDTO } from '../schema';
+import { ShowUserService } from '../services/show.service';
 
 export function ShowUserController() {
   return {

@@ -1,8 +1,8 @@
-import { AppError } from "@/errors/app-error";
-import { CreateUserDTO } from "../schema";
-import { StatusCodes } from "http-status-codes";
-import { hash } from "bcryptjs";
-import { UserRepository } from "../repositories/user.repository";
+import { hash } from 'bcryptjs';
+import { StatusCodes } from 'http-status-codes';
+import { UserRepository } from '../repositories/user.repository';
+import { CreateUserDTO } from '../schema';
+import { AppError } from '@/errors/app-error';
 
 export function CreateUserService() {
   const userRepository = UserRepository();
@@ -13,8 +13,8 @@ export function CreateUserService() {
 
       if (user) {
         throw new AppError({
-          code: "duplicate.email",
-          message: "User already exist with same email",
+          code: 'duplicate.email',
+          message: 'User already exist with same email',
           statusCode: StatusCodes.CONFLICT,
         });
       }

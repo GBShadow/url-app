@@ -1,7 +1,7 @@
-import { AppError } from "@/errors/app-error";
-import { ShowUrlDTO } from "../schema";
-import { UrlRepository } from "../repositories/url.repository";
-import { StatusCodes } from "http-status-codes";
+import { StatusCodes } from 'http-status-codes';
+import { UrlRepository } from '../repositories/url.repository';
+import { ShowUrlDTO } from '../schema';
+import { AppError } from '@/errors/app-error';
 
 export function ShowUrlService() {
   const urlRepository = UrlRepository();
@@ -12,8 +12,8 @@ export function ShowUrlService() {
 
       if (!url) {
         throw new AppError({
-          code: "not.found",
-          message: "Url not found",
+          code: 'not.found',
+          message: 'Url not found',
           statusCode: StatusCodes.NOT_FOUND,
         });
       }

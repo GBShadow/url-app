@@ -1,7 +1,7 @@
-import { db } from "@/database/prisma";
-import { CreateUserDTO, ListUserDTO, UpdateUserDTO } from "../schema";
-import { MAX_QUANTITY } from "@/shared/constants";
-import { calcPages } from "@/functions/pages";
+import { CreateUserDTO, ListUserDTO, UpdateUserDTO } from '../schema';
+import { db } from '@/database/prisma';
+import { calcPages } from '@/functions/pages';
+import { MAX_QUANTITY } from '@/shared/constants';
 
 export function UserRepository() {
   return {

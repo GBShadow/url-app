@@ -1,5 +1,5 @@
-import { ListUrlDTO } from "../schema";
-import { UrlRepository } from "../repositories/url.repository";
+import { UrlRepository } from '../repositories/url.repository';
+import { ListUrlDTO } from '../schema';
 
 export function ListUrlService() {
   const urlRepository = UrlRepository();
@@ -8,7 +8,7 @@ export function ListUrlService() {
     async execute(
       data: ListUrlDTO & {
         userId: string;
-      }
+      },
     ) {
       const urls = await urlRepository.findAll(data);
 

@@ -1,4 +1,4 @@
-import z from "zod";
+import z from 'zod';
 
 export const createUserSchema = z.object({
   name: z.string().nonempty(),
@@ -23,8 +23,8 @@ export const listUserSchema = z.object({
     .transform((v) => v && Number(v))
     .default(1)
     .pipe(z.number()),
-  orderBy: z.enum(["id", "name", "createdAt"]).optional().default("createdAt"),
-  order: z.enum(["asc", "desc"]).optional().default("desc"),
+  orderBy: z.enum(['id', 'name', 'createdAt']).optional().default('createdAt'),
+  order: z.enum(['asc', 'desc']).optional().default('desc'),
 });
 
 export const userResponseSchema = z.object({

@@ -1,5 +1,5 @@
-import { DeleteUrlDTO } from "../schema";
-import { DeleteUrlService } from "../services/delete.service";
+import { DeleteUrlDTO } from '../schema';
+import { DeleteUrlService } from '../services/delete.service';
 
 export function DeleteUrlController() {
   return {

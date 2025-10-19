@@ -1,9 +1,9 @@
-import { AppError } from "@/errors/app-error";
-import { CreateUrlDTO } from "../schema";
-import { StatusCodes } from "http-status-codes";
-import { UrlRepository } from "../repositories/url.repository";
-import { env } from "@/env";
-import { randomString } from "@/functions/utils";
+import { StatusCodes } from 'http-status-codes';
+import { UrlRepository } from '../repositories/url.repository';
+import { CreateUrlDTO } from '../schema';
+import { env } from '@/env';
+import { AppError } from '@/errors/app-error';
+import { randomString } from '@/functions/utils';
 
 export function CreateUrlService() {
   const urlRepository = UrlRepository();
@@ -26,8 +26,8 @@ export function CreateUrlService() {
       });
       if (url) {
         throw new AppError({
-          code: "duplicate.url",
-          message: "Url already exist",
+          code: 'duplicate.url',
+          message: 'Url already exist',
           statusCode: StatusCodes.CONFLICT,
         });
       }

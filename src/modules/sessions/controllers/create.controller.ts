@@ -1,5 +1,5 @@
-import { CreateSessionDTO } from "../schema";
-import { CreateSessionService } from "../services/create.service";
+import { CreateSessionDTO } from '../schema';
+import { CreateSessionService } from '../services/create.service';
 
 export function CreateSessionController() {
   return {

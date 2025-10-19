@@ -1,4 +1,4 @@
-import { StatusCodes, getReasonPhrase } from "http-status-codes";
+import { StatusCodes, getReasonPhrase } from 'http-status-codes';
 
 type AppErrorDto = {
   statusCode?: number;
@@ -15,7 +15,7 @@ export class AppError extends Error {
   constructor({ statusCode, message, code }: AppErrorDto) {
     super();
     this.message = message;
-    this.code = code ?? "blank";
+    this.code = code ?? 'blank';
     this.statusCode = statusCode ?? StatusCodes.BAD_REQUEST;
     this.error = getReasonPhrase(statusCode || StatusCodes.BAD_REQUEST);
   }

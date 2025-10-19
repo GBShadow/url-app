@@ -1,11 +1,11 @@
-import { AppError } from "@/errors/app-error";
-import { FastifyError, FastifyReply, FastifyRequest } from "fastify";
-import { StatusCodes } from "http-status-codes";
+import { FastifyError, FastifyReply, FastifyRequest } from 'fastify';
+import { StatusCodes } from 'http-status-codes';
+import { AppError } from '@/errors/app-error';
 
 export function errorHandler(
   error: FastifyError,
   _: FastifyRequest,
-  reply: FastifyReply
+  reply: FastifyReply,
 ) {
   if (error instanceof AppError) {
     return reply.status(error.statusCode).send({

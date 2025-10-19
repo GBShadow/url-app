@@ -1,5 +1,5 @@
-import { ShowUrlDTO } from "../schema";
-import { ShowUrlService } from "../services/show.service";
+import { ShowUrlDTO } from '../schema';
+import { ShowUrlService } from '../services/show.service';
 
 export function ShowUrlController() {
   return {

@@ -1,5 +1,5 @@
-import { ListUserDTO } from "../schema";
-import { ListUserService } from "../services/list.service";
+import { ListUserDTO } from '../schema';
+import { ListUserService } from '../services/list.service';
 
 export function ListUserController() {
   return {

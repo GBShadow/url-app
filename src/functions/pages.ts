@@ -1,4 +1,4 @@
-import { MAX_QUANTITY } from "@/shared/constants";
+import { MAX_QUANTITY } from '@/shared/constants';
 
 type CalcPages = {
   totalItems: number;

@@ -1,5 +1,5 @@
-import { CreateUrlDTO } from "../schema";
-import { CreateUrlService } from "../services/create.service";
+import { CreateUrlDTO } from '../schema';
+import { CreateUrlService } from '../services/create.service';
 
 export function CreateUrlController() {
   return {

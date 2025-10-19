@@ -1,7 +1,7 @@
-import { AppError } from "@/errors/app-error";
-import { ShowUserDTO } from "../schema";
-import { UserRepository } from "../repositories/user.repository";
-import { StatusCodes } from "http-status-codes";
+import { StatusCodes } from 'http-status-codes';
+import { UserRepository } from '../repositories/user.repository';
+import { ShowUserDTO } from '../schema';
+import { AppError } from '@/errors/app-error';
 
 export function ShowUserService() {
   const userRepository = UserRepository();
@@ -12,8 +12,8 @@ export function ShowUserService() {
 
       if (!user) {
         throw new AppError({
-          code: "not.found",
-          message: "User not found",
+          code: 'not.found',
+          message: 'User not found',
           statusCode: StatusCodes.NOT_FOUND,
         });
       }

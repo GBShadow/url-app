@@ -1,29 +1,29 @@
-import { currentUser } from "@/functions/utils";
-import { CreateUrlController } from "@/modules/urls/controllers/create.controller";
-import { ListUrlController } from "@/modules/urls/controllers/list.controller";
-import { ShowUrlController } from "@/modules/urls/controllers/show.controller";
-import { UpdateUrlController } from "@/modules/urls/controllers/update.controller";
+import { ReasonPhrases, StatusCodes } from 'http-status-codes';
+import z from 'zod';
+import { DeleteUrlController } from '../controllers/delete.controller';
+import { RedirectUrlController } from '../controllers/redirect.controller';
+import { currentUser } from '@/functions/utils';
+import { CreateUrlController } from '@/modules/urls/controllers/create.controller';
+import { ListUrlController } from '@/modules/urls/controllers/list.controller';
+import { ShowUrlController } from '@/modules/urls/controllers/show.controller';
+import { UpdateUrlController } from '@/modules/urls/controllers/update.controller';
 import {
   createUrlSchema,
   listUrlSchema,
   paramUrlSchema,
   updateUrlSchema,
   urlResponseSchema,
-} from "@/modules/urls/schema";
-import { errorResponseSchema } from "@/shared/schema";
-import { FastifyTypedInstance } from "@/shared/types";
-import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import z from "zod";
-import { RedirectUrlController } from "../controllers/redirect.controller";
-import { DeleteUrlController } from "../controllers/delete.controller";
+} from '@/modules/urls/schema';
+import { errorResponseSchema } from '@/shared/schema';
+import { FastifyTypedInstance } from '@/shared/types';
 
 export function urlRoutes(app: FastifyTypedInstance) {
   app.get(
-    "/:param",
+    '/:param',
     {
       schema: {
-        tags: ["Urls"],
-        description: "Redirect to destination url",
+        tags: ['Urls'],
+        description: 'Redirect to destination url',
         params: z.object({ param: z.string().nonempty() }),
       },
     },
@@ -32,14 +32,14 @@ export function urlRoutes(app: FastifyTypedInstance) {
       const controller = RedirectUrlController();
       const url = await controller.execute(params.param);
       return reply.redirect(url);
-    }
+    },
   );
   app.post(
-    "/urls",
+    '/urls',
     {
       schema: {
-        tags: ["Urls"],
-        description: "Create a new url",
+        tags: ['Urls'],
+        description: 'Create a new url',
         body: createUrlSchema,
         response: {
           [StatusCodes.CREATED]: urlResponseSchema.extend({
@@ -53,14 +53,14 @@ export function urlRoutes(app: FastifyTypedInstance) {
             deletedAt: z.date().nullable().optional(),
           }),
           [StatusCodes.CONFLICT]: errorResponseSchema.default({
-            code: "duplicate.email",
-            message: "Url already exist",
+            code: 'duplicate.email',
+            message: 'Url already exist',
             statusCode: StatusCodes.CONFLICT,
             error: ReasonPhrases.CONFLICT,
           }),
           [StatusCodes.BAD_REQUEST]: errorResponseSchema.default({
-            code: "string",
-            message: "string",
+            code: 'string',
+            message: 'string',
             statusCode: StatusCodes.BAD_REQUEST,
             error: ReasonPhrases.BAD_REQUEST,
           }),
@@ -77,27 +77,27 @@ export function urlRoutes(app: FastifyTypedInstance) {
         userId: user?.sub,
       });
       return reply.status(StatusCodes.CREATED).send(url);
-    }
+    },
   );
 
   app.delete(
-    "/urls/:id",
+    '/urls/:id',
     {
       schema: {
-        tags: ["Urls"],
-        description: "Delete a url",
+        tags: ['Urls'],
+        description: 'Delete a url',
         params: paramUrlSchema,
         response: {
           [StatusCodes.NO_CONTENT]: urlResponseSchema,
           [StatusCodes.NOT_FOUND]: errorResponseSchema.default({
-            code: "not.found",
-            message: "Url not found",
+            code: 'not.found',
+            message: 'Url not found',
             statusCode: StatusCodes.NOT_FOUND,
             error: ReasonPhrases.NOT_FOUND,
           }),
           [StatusCodes.BAD_REQUEST]: errorResponseSchema.default({
-            code: "string",
-            message: "string",
+            code: 'string',
+            message: 'string',
             statusCode: StatusCodes.BAD_REQUEST,
             error: ReasonPhrases.BAD_REQUEST,
           }),
@@ -114,27 +114,27 @@ export function urlRoutes(app: FastifyTypedInstance) {
         userId: user.sub,
       });
       return reply.status(StatusCodes.NO_CONTENT).send();
-    }
+    },
   );
 
   app.get(
-    "/urls/:id",
+    '/urls/:id',
     {
       schema: {
-        tags: ["Urls"],
-        description: "Show a url",
+        tags: ['Urls'],
+        description: 'Show a url',
         params: paramUrlSchema,
         response: {
           [StatusCodes.OK]: urlResponseSchema,
           [StatusCodes.NOT_FOUND]: errorResponseSchema.default({
-            code: "not.found",
-            message: "Url not found",
+            code: 'not.found',
+            message: 'Url not found',
             statusCode: StatusCodes.NOT_FOUND,
             error: ReasonPhrases.NOT_FOUND,
           }),
           [StatusCodes.BAD_REQUEST]: errorResponseSchema.default({
-            code: "string",
-            message: "string",
+            code: 'string',
+            message: 'string',
             statusCode: StatusCodes.BAD_REQUEST,
             error: ReasonPhrases.BAD_REQUEST,
           }),
@@ -151,15 +151,15 @@ export function urlRoutes(app: FastifyTypedInstance) {
         userId: user.sub,
       });
       return reply.status(StatusCodes.OK).send(url);
-    }
+    },
   );
 
   app.get(
-    "/urls",
+    '/urls',
     {
       schema: {
-        tags: ["Urls"],
-        description: "List urls",
+        tags: ['Urls'],
+        description: 'List urls',
         querystring: listUrlSchema,
         response: {
           [StatusCodes.OK]: z.object({
@@ -168,8 +168,8 @@ export function urlRoutes(app: FastifyTypedInstance) {
             totalItems: z.number(),
           }),
           [StatusCodes.BAD_REQUEST]: errorResponseSchema.default({
-            code: "string",
-            message: "string",
+            code: 'string',
+            message: 'string',
             statusCode: StatusCodes.BAD_REQUEST,
             error: ReasonPhrases.BAD_REQUEST,
           }),
@@ -186,34 +186,34 @@ export function urlRoutes(app: FastifyTypedInstance) {
         userId: user.sub,
       });
       return reply.status(StatusCodes.OK).send(urls);
-    }
+    },
   );
 
   app.put(
-    "/urls/:id",
+    '/urls/:id',
     {
       schema: {
-        tags: ["Urls"],
-        description: "Update a url",
+        tags: ['Urls'],
+        description: 'Update a url',
         body: updateUrlSchema,
         params: paramUrlSchema,
         response: {
           [StatusCodes.OK]: urlResponseSchema,
           [StatusCodes.NOT_FOUND]: errorResponseSchema.default({
-            code: "not.found",
-            message: "Url not found",
+            code: 'not.found',
+            message: 'Url not found',
             statusCode: StatusCodes.NOT_FOUND,
             error: ReasonPhrases.NOT_FOUND,
           }),
           [StatusCodes.CONFLICT]: errorResponseSchema.default({
-            code: "duplicate.email",
-            message: "Url already exist",
+            code: 'duplicate.email',
+            message: 'Url already exist',
             statusCode: StatusCodes.CONFLICT,
             error: ReasonPhrases.CONFLICT,
           }),
           [StatusCodes.BAD_REQUEST]: errorResponseSchema.default({
-            code: "string",
-            message: "string",
+            code: 'string',
+            message: 'string',
             statusCode: StatusCodes.BAD_REQUEST,
             error: ReasonPhrases.BAD_REQUEST,
           }),
@@ -231,6 +231,6 @@ export function urlRoutes(app: FastifyTypedInstance) {
         userId: user.sub,
       });
       return reply.status(StatusCodes.OK).send(url);
-    }
+    },
   );
 }

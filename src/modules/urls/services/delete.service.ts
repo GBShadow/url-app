@@ -1,7 +1,7 @@
-import { AppError } from "@/errors/app-error";
-import { UrlRepository } from "../repositories/url.repository";
-import { DeleteUrlDTO } from "../schema";
-import { StatusCodes } from "http-status-codes";
+import { StatusCodes } from 'http-status-codes';
+import { UrlRepository } from '../repositories/url.repository';
+import { DeleteUrlDTO } from '../schema';
+import { AppError } from '@/errors/app-error';
 
 export function DeleteUrlService() {
   const urlRepository = UrlRepository();
@@ -11,8 +11,8 @@ export function DeleteUrlService() {
       const url = await urlRepository.findById(data);
       if (!url) {
         throw new AppError({
-          code: "not.found",
-          message: "Url not found",
+          code: 'not.found',
+          message: 'Url not found',
           statusCode: StatusCodes.NOT_FOUND,
         });
       }

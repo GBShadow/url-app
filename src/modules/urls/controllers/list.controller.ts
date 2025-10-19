@@ -1,5 +1,5 @@
-import { ListUrlDTO } from "../schema";
-import { ListUrlService } from "../services/list.service";
+import { ListUrlDTO } from '../schema';
+import { ListUrlService } from '../services/list.service';
 
 export function ListUrlController() {
   return {

@@ -1,6 +1,6 @@
-import { AppError } from "@/errors/app-error";
-import { UrlRepository } from "../repositories/url.repository";
-import { StatusCodes } from "http-status-codes";
+import { StatusCodes } from 'http-status-codes';
+import { UrlRepository } from '../repositories/url.repository';
+import { AppError } from '@/errors/app-error';
 
 export function RedirectUrlService() {
   const urlRepository = UrlRepository();
@@ -11,8 +11,8 @@ export function RedirectUrlService() {
 
       if (!url) {
         throw new AppError({
-          code: "not.found",
-          message: "Url not found",
+          code: 'not.found',
+          message: 'Url not found',
           statusCode: StatusCodes.NOT_FOUND,
         });
       }

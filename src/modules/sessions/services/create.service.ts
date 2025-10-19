@@ -1,11 +1,11 @@
-import { AppError } from "@/errors/app-error";
-import { CreateSessionDTO } from "../schema";
-import { StatusCodes } from "http-status-codes";
-import { UserRepository } from "@/modules/users/repositories/user.repository";
-import { compare } from "bcryptjs";
-import jwt from "jsonwebtoken";
-import { env } from "@/env";
-import { convertBuffer } from "@/functions/utils";
+import { compare } from 'bcryptjs';
+import { StatusCodes } from 'http-status-codes';
+import jwt from 'jsonwebtoken';
+import { CreateSessionDTO } from '../schema';
+import { env } from '@/env';
+import { AppError } from '@/errors/app-error';
+import { convertBuffer } from '@/functions/utils';
+import { UserRepository } from '@/modules/users/repositories/user.repository';
 
 export function CreateSessionService() {
   const userRepository = UserRepository();
@@ -18,7 +18,7 @@ export function CreateSessionService() {
 
       if (!user) {
         throw new AppError({
-          message: "Email/Password invalid",
+          message: 'Email/Password invalid',
           statusCode: StatusCodes.UNAUTHORIZED,
         });
       }
@@ -26,7 +26,7 @@ export function CreateSessionService() {
 
       if (!passwordValid) {
         throw new AppError({
-          message: "Email/Password invalid",
+          message: 'Email/Password invalid',
           statusCode: StatusCodes.UNAUTHORIZED,
         });
       }
@@ -35,9 +35,9 @@ export function CreateSessionService() {
         { sub: user.id, email: user.email },
         convertBuffer(env.JWT_PRIVATE_KEY),
         {
-          algorithm: "RS256",
-          expiresIn: "1h",
-        }
+          algorithm: 'RS256',
+          expiresIn: '1h',
+        },
       );
 
       return { token };

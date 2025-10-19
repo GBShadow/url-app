@@ -1,9 +1,9 @@
-import { JwtPayload } from "@/shared/types";
-import { FastifyRequest } from "fastify";
-import cryptoRandomString from "crypto-random-string";
+import cryptoRandomString from 'crypto-random-string';
+import { FastifyRequest } from 'fastify';
+import { JwtPayload } from '@/shared/types';
 
 export const convertBuffer = (value: string) => {
-  return Buffer.from(value, "base64").toString();
+  return Buffer.from(value, 'base64').toString();
 };
 
 export const currentUser = (req: FastifyRequest) => {
@@ -11,4 +11,4 @@ export const currentUser = (req: FastifyRequest) => {
 };
 
 export const randomString = () =>
-  cryptoRandomString({ length: 6, type: "alphanumeric" });
+  cryptoRandomString({ length: 6, type: 'alphanumeric' });

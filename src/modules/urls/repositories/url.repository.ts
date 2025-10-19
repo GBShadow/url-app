@@ -1,13 +1,13 @@
-import { db } from "@/database/prisma";
 import {
   CreateUrlDTO,
   DeleteUrlDTO,
   ListUrlDTO,
   UpdateUrlDTO,
-} from "../schema";
-import { MAX_QUANTITY } from "@/shared/constants";
-import { calcPages } from "@/functions/pages";
-import { env } from "@/env";
+} from '../schema';
+import { db } from '@/database/prisma';
+import { env } from '@/env';
+import { calcPages } from '@/functions/pages';
+import { MAX_QUANTITY } from '@/shared/constants';
 
 export function UrlRepository() {
   return {
@@ -69,7 +69,7 @@ export function UrlRepository() {
       };
     },
     async create(
-      data: CreateUrlDTO & { generatedUrl: string; userId?: string }
+      data: CreateUrlDTO & { generatedUrl: string; userId?: string },
     ) {
       return db.url.create({
         data: {

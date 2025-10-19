@@ -1,4 +1,4 @@
-import { RedirectUrlService } from "../services/redirect.service";
+import { RedirectUrlService } from '../services/redirect.service';
 
 export function RedirectUrlController() {
   return {

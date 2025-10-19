@@ -1,7 +1,6 @@
-import { Worker } from "cluster";
+import cluster, { Worker } from 'cluster';
 
-import cluster from "cluster";
-import os from "os";
+import os from 'os';
 
 const numCPUs = os.cpus().length;
 
@@ -11,10 +10,11 @@ if (cluster.isPrimary) {
     cluster.fork();
   }
 
-  cluster.on("exit", (worker: Worker) => {
-    console.log(`Worker ${worker.process.pid} morreu. Reiniciando...`);
+  cluster.on('exit', (worker: Worker) => {
+    console.log(`Worker ${worker.process.pid} dead. reboot...`);
     cluster.fork();
   });
 } else {
-  require("./server");
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  require('./server');
 }

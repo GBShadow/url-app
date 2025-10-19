@@ -1,5 +1,5 @@
-import { UpdateUrlDTO } from "../schema";
-import { UpdateUrlService } from "../services/update.service";
+import { UpdateUrlDTO } from '../schema';
+import { UpdateUrlService } from '../services/update.service';
 
 export function UpdateUrlController() {
   return {

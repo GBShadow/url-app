@@ -1,4 +1,4 @@
-import z from "zod";
+import z from 'zod';
 
 export const createUrlSchema = z.object({
   baseUrl: z
@@ -33,10 +33,10 @@ export const listUrlSchema = z.object({
     .default(1)
     .pipe(z.number()),
   orderBy: z
-    .enum(["id", "baseUrl", "createdAt"])
+    .enum(['id', 'baseUrl', 'createdAt'])
     .optional()
-    .default("createdAt"),
-  order: z.enum(["asc", "desc"]).optional().default("desc"),
+    .default('createdAt'),
+  order: z.enum(['asc', 'desc']).optional().default('desc'),
 });
 
 export const urlResponseSchema = z.object({

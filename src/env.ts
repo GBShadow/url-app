@@ -1,4 +1,4 @@
-import z from "zod";
+import z from 'zod';
 
 const envSchema = z.object({
   DATABASE_URL: z.url().nonempty(),
@@ -9,9 +9,9 @@ const envSchema = z.object({
     .url()
     .nonempty()
     .transform((v) => {
-      if (v.endsWith("/")) {
-        console.log("Lembre de não colocar a barra no final");
-        return v.replace(/\/+$/, "");
+      if (v.endsWith('/')) {
+        console.log('Lembre de não colocar a barra no final');
+        return v.replace(/\/+$/, '');
       }
       return v;
     }),
