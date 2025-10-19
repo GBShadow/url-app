@@ -9,7 +9,8 @@
   "scripts": {
     "prepare": "husky",
     "start": "node dist/cluster.cjs",
-    "dev": "tsx watch --env-file=.env src/server.ts",
+    "dev": "tsx watch src/server.ts",
+    "dev:test": "tsx watch --env-file=.env src/server.ts",
     "dev:cluster": "tsx watch --env-file=.env src/cluster.ts",
     "docker:dev": "docker compose up --build --force-recreate --no-deps -V",
     "lint": "eslint . --ext .ts --fix",
