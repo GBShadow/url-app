@@ -1,6 +1,6 @@
 import swc from 'unplugin-swc';
 import tsConfigPaths from 'vite-tsconfig-paths';
-import { defineConfig } from 'vitest/config';
+import { configDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig({
   define: {
@@ -9,8 +9,13 @@ export default defineConfig({
   test: {
     globals: true,
     root: './src',
+    exclude: [...configDefaults.exclude],
     deps: {
-      external: [],
+      optimizer: {
+        ssr: {
+          exclude: [],
+        },
+      },
     },
   },
   plugins: [

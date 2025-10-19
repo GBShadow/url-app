@@ -2,7 +2,7 @@ import 'dotenv/config';
 import os from 'os';
 import swc from 'unplugin-swc';
 import tsConfigPaths from 'vite-tsconfig-paths';
-import { defineConfig } from 'vitest/config';
+import { configDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig(() => {
   const cpus = os.cpus().length;
@@ -21,8 +21,13 @@ export default defineConfig(() => {
           },
         },
       }),
+      exclude: [...configDefaults.exclude],
       deps: {
-        external: [],
+        optimizer: {
+          ssr: {
+            exclude: [],
+          },
+        },
       },
       include: ['**/*.e2e-spec.ts'],
       globals: true,

@@ -7,7 +7,7 @@
     "lib": ["es2024", "ESNext.Array", "ESNext.Collection", "ESNext.Iterator"],
     "module": "nodenext",
     "target": "es2022",
-    "types": ["node", "fastify"],
+    "types": ["node", "fastify", "vitest/globals"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -16,6 +16,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "src/@types/**/*.d.ts"],
+  "include": ["src", "src/@types/**/*.d.ts", "test"],
   "exclude": ["node_modules"]
 }
