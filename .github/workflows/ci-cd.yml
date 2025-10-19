@@ -45,6 +45,8 @@ jobs:
       - name: ⏳ Aguardar serviços subirem
         run: |
           sleep 15
+          docker logs app_dev
+
           
       - name: ⏳ Esperar app_dev estar pronto
         run: |

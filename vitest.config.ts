@@ -10,13 +10,6 @@ export default defineConfig({
     globals: true,
     root: './src',
     exclude: [...configDefaults.exclude],
-    deps: {
-      optimizer: {
-        ssr: {
-          exclude: [],
-        },
-      },
-    },
   },
   plugins: [
     tsConfigPaths(),

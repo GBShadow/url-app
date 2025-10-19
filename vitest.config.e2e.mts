@@ -22,13 +22,6 @@ export default defineConfig(() => {
         },
       }),
       exclude: [...configDefaults.exclude],
-      deps: {
-        optimizer: {
-          ssr: {
-            exclude: [],
-          },
-        },
-      },
       include: ['**/*.e2e-spec.ts'],
       globals: true,
       root: './src',
