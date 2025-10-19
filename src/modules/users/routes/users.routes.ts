@@ -15,8 +15,6 @@ import { errorResponseSchema } from '@/shared/schema';
 import { FastifyTypedInstance } from '@/shared/types';
 
 export function userRoutes(app: FastifyTypedInstance) {
-  app.addHook('onRequest', app.authenticate);
-
   app.get(
     '/users/:id',
     {
@@ -40,6 +38,7 @@ export function userRoutes(app: FastifyTypedInstance) {
           }),
         },
       },
+      onRequest: [app.authenticate],
     },
     async (request, reply) => {
       const params = request.params;
@@ -70,6 +69,7 @@ export function userRoutes(app: FastifyTypedInstance) {
           }),
         },
       },
+      onRequest: [app.authenticate],
     },
     async (request, reply) => {
       const queries = request.query;
@@ -141,6 +141,7 @@ export function userRoutes(app: FastifyTypedInstance) {
           }),
         },
       },
+      onRequest: [app.authenticate],
     },
     async (request, reply) => {
       const params = request.params;

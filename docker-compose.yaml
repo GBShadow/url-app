@@ -10,8 +10,6 @@ services:
     expose:
       - $PORT
     tty: true
-    env_file:
-      - .env
     ports:
       - $PORT:$PORT
     volumes:
