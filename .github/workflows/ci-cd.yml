@@ -12,6 +12,12 @@ jobs:
   ci:
     name: 🔍 Lint & Test (Docker Compose)
     runs-on: ubuntu-latest
+    env:
+      JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
+      JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DOMAIN: ${{ secrets.DOMAIN }}
+      PORT: ${{ secrets.PORT }}
 
     services:
       docker:
@@ -29,12 +35,6 @@ jobs:
         run: |
           docker compose up -d --build
           docker compose ps
-        env:
-          JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
-          JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          DOMAIN: ${{ secrets.DOMAIN }}
-
 
       - name: ⏳ Aguardar serviços subirem
         run: |
