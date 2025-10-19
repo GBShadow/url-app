@@ -45,9 +45,21 @@ jobs:
       - name: ⏳ Aguardar serviços subirem
         run: |
           sleep 15
+          
+      - name: ⏳ Esperar app_dev estar pronto
+        run: |
+          for i in {1..10}; do
+            if docker exec app_dev true 2>/dev/null; then
+              echo "Container app_dev está pronto!"
+              break
+            else
+              echo "Esperando container app_dev iniciar..."
+              sleep 2
+            fi
+          done
 
-      # - name: ✅ Rodar Lint (dentro do container app)
-        # run: docker exec app_dev npm run lint
+      - name: ✅ Rodar Lint (dentro do container app)
+        run: docker exec app_dev npm run lint
 
       - name: 🧪 Testes Unitários
         run: docker exec app_dev npm run test
