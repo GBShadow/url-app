@@ -39,14 +39,13 @@ jobs:
           DOMAIN: ${{ vars.DOMAIN }}
           PORT: ${{ vars.PORT }}
         run: |
-          docker compose up --build --force-recreate --no-deps -V -d
+          docker compose up -d --build
           docker compose ps
-          docker logs app_dev
 
       - name: ⏳ Aguardar serviços subirem
         run: |
           sleep 15
-
+          docker logs app_dev
           
       - name: ⏳ Esperar app_dev estar pronto
         run: |
