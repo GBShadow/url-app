@@ -17,5 +17,3 @@ COPY . .
 RUN npx prisma generate
 
 EXPOSE $PORT
-
-# CMD [ "npm", "run", "dev" ]

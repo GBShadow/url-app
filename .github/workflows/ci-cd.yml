@@ -30,6 +30,9 @@ jobs:
       - name: 🐳 Set up Docker Compose
         run: |
           docker compose --version
+      
+      - name: 🔧 Subir containers (sem rodar dev)
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d --build
 
       - name: 🐳 Build e subir containers
         env:
