@@ -9,8 +9,7 @@ WORKDIR /home/node/app
 
 COPY package*.json ./
 
-ENV NODE_ENV=development
-RUN npm ci --silent --include=dev && npm cache clean --force
+RUN npm ci --silent && npm cache clean --force
 
 COPY . .
 
