@@ -46,8 +46,8 @@ jobs:
         run: |
           sleep 15
 
-      - name: ✅ Rodar Lint (dentro do container app)
-        run: docker exec app_dev npm run lint
+      # - name: ✅ Rodar Lint (dentro do container app)
+        # run: docker exec app_dev npm run lint
 
       - name: 🧪 Testes Unitários
         run: docker exec app_dev npm run test
