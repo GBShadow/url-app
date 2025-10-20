@@ -21,7 +21,7 @@ services:
       - DOMAIN=$DOMAIN
       - JWT_PRIVATE_KEY=$JWT_PRIVATE_KEY
       - JWT_PUBLIC_KEY=$JWT_PUBLIC_KEY
-      - DATABASE_URL=$DATABASE_URL
+      - DATABASE_URL=postgresql://postgres:docker@db:5432/server_app?schema=url_app
     depends_on:
       db:
         condition: service_healthy
