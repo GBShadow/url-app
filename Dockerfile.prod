@@ -12,6 +12,7 @@ COPY package*.json ./
 RUN npm ci -s && npm cache clean --force
 
 COPY prisma ./prisma
+COPY entrypoint.sh ./entrypoint.sh
 
 COPY . .
 
@@ -26,10 +27,11 @@ COPY package*.json ./
 COPY --from=build /app/dist ./dist
 
 COPY --from=build /app/prisma ./prisma
+COPY --from=build /app/entrypoint.sh ./entrypoint.sh
 
 RUN npm ci -s && npm cache clean --force 
 
-RUN npx prisma generate
+RUN npx prisma generate 
 
 RUN npm prune --omit=dev
 
@@ -39,4 +41,4 @@ RUN addgroup -g 1001 -S userApp && adduser -u 1001 -S userApp -G userApp
 
 USER userApp
 
-CMD ["node", "dist/cluster.js"]
+ENTRYPOINT ["sh", "./entrypoint.sh"]
