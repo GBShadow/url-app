@@ -18,7 +18,8 @@ export default fp(async (app: FastifyTypedInstance) => {
     try {
       req.user = await req.jwtVerify<JwtPayload>();
     } catch {
-      req.user = '';
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      req.user = null as any;
     }
   });
 });

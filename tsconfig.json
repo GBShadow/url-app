@@ -17,5 +17,5 @@
     }
   },
   "include": ["src", "src/@types/**/*.d.ts", "test"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

@@ -8,10 +8,24 @@ import { randomString } from '@/functions/utils';
 export function CreateUrlService() {
   const urlRepository = UrlRepository();
 
+  async function generatedUrlHelper(userId?: string) {
+    const param = randomString();
+    if (!userId) {
+      return `${env.DOMAIN}/${param}`;
+    }
+    const foundURL = await urlRepository.findByParam(param);
+
+    if (foundURL) {
+      generatedUrlHelper(userId);
+    }
+
+    return `${env.DOMAIN}/${param}`;
+  }
+
   return {
     async execute(data: CreateUrlDTO & { userId?: string }) {
       if (!data.userId) {
-        const generatedUrl = `${env.DOMAIN}/${randomString()}`;
+        const generatedUrl = await generatedUrlHelper();
 
         await urlRepository.create({
           baseUrl: data.baseUrl,
@@ -32,7 +46,7 @@ export function CreateUrlService() {
         });
       }
 
-      const generatedUrl = `${env.DOMAIN}/${randomString()}`;
+      const generatedUrl = await generatedUrlHelper();
 
       return urlRepository.create({
         baseUrl: data.baseUrl,

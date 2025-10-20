@@ -1,16 +1,17 @@
 FROM node:22-slim AS build
 
-WORKDIR /home/node/app
+WORKDIR /app
 
 RUN apt-get update && \
   apt-get upgrade -y && \
-  rm -rf /var/lib/apt/lists/*
+  apt-get install -y openssl && \
+  rm -rf /var/lib/apt/lists/* 
 
 COPY package*.json ./
 
-COPY prisma ./prisma
+RUN npm ci -s && npm cache clean --force
 
-RUN npx prisma generate
+COPY prisma ./prisma
 
 COPY . .
 
@@ -18,7 +19,7 @@ RUN npm run build
 
 FROM node:22-alpine AS prod
 
-WORKDIR /home/node/app
+WORKDIR /app
 
 COPY package*.json ./
 
@@ -26,7 +27,11 @@ COPY --from=build /app/dist ./dist
 
 COPY --from=build /app/prisma ./prisma
 
+RUN npm ci -s && npm cache clean --force 
+
 RUN npx prisma generate
+
+RUN npm prune --omit=dev
 
 EXPOSE $PORT
 
@@ -34,4 +39,4 @@ RUN addgroup -g 1001 -S userApp && adduser -u 1001 -S userApp -G userApp
 
 USER userApp
 
-CMD ["node", "dist/server"]
+CMD ["node", "dist/cluster.js"]
