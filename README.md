@@ -29,6 +29,10 @@ A API estará disponível em:
 
 👉 `https://url-app-ef0a.onrender.com`
 
+Documentação Swagger neste link:
+
+👉 `https://url-app-ef0a.onrender.com/docs`
+
 ## 🔧 Scripts
 
 ```bash
