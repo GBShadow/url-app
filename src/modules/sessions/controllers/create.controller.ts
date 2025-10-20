@@ -1,10 +1,12 @@
+import { UserRepository } from '@/modules/users/repositories/user.repository';
 import { CreateSessionDTO } from '../schema';
 import { CreateSessionService } from '../services/create.service';
 
 export function CreateSessionController() {
+  const userRepository = UserRepository();
+  const service = CreateSessionService(userRepository);
   return {
     async execute(data: CreateSessionDTO) {
-      const service = CreateSessionService();
       return service.execute(data);
     },
   };

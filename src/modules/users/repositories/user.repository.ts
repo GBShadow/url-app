@@ -2,8 +2,9 @@ import { CreateUserDTO, ListUserDTO, UpdateUserDTO } from '../schema';
 import { db } from '@/database/prisma';
 import { calcPages } from '@/functions/pages';
 import { MAX_QUANTITY } from '@/shared/constants';
+import { IUserRepository } from '../interfaces/user-repository';
 
-export function UserRepository() {
+export function UserRepository(): IUserRepository {
   return {
     async findByEmail(email: string, { omit } = { omit: true }) {
       return db.user.findFirst({

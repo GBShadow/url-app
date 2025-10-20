@@ -23,6 +23,12 @@ Uma API para encurtar URLs. Utiliza Node.js, TypeScript, Fastify, Prisma, Docker
 - **Husky** + **Lint-Staged** (hooks de commit)
 - **Cluster** (escalabilidade vertical)
 
+## 🌐 Endpoint Base
+
+A API estará disponível em:
+
+👉 `https://url-app-ef0a.onrender.com`
+
 ## 🔧 Scripts
 
 ```bash
@@ -46,6 +52,27 @@ npm run test         # Testes unitários
 npm run test:e2e     # Testes end-to-end
 ```
 
+## 📦 Gerar Private e Public key
+
+### Comandos no Linux
+
+#### Private Key
+
+openssl genpkey -algorithm RSA -out private_key.pem -pkeyopt rsa_keygen_bits:2048
+
+#### Public Key
+
+openssl rsa -pubout -in private_key.pem -out public_key.pem
+
+### Base64 para colocar no arquivo env
+
+cat private_key.pem | base64 | tr -d '\n' > private_key.txt
+cat public_key.pem | base64 | tr -d '\n' > public_key.txt
+
+### Remover os arquivos gerados
+
+rm private_key.pem public_key.pem private_key.txt public_key.txt
+
 ## 📦 Variáveis de Ambiente
 
 Configure um arquivo `.env` com as seguintes variáveis:
@@ -53,8 +80,8 @@ Configure um arquivo `.env` com as seguintes variáveis:
 ```env
 PORT=3000
 DATABASE_URL=postgresql://user:password@localhost:5432/dbname
-JWT_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\n...
-JWT_PUBLIC_KEY=-----BEGIN PUBLIC KEY-----\n...
+JWT_PRIVATE_KEY=-----PRIVATE-----\n...
+JWT_PUBLIC_KEY=-----PUBLIC-----\n...
 DOMAIN=https://encurtador.com
 ```
 
@@ -85,12 +112,6 @@ Testes e2e:
 npm run test:e2e
 ```
 
-## 🌐 Endpoint Base
-
-A API estará disponível em:
-
-👉 `https://api.encurtador.com`
-
 ## ✅ Checklist de Funcionalidades
 
 ### ✔️ Implementado (v0.0.1)
@@ -108,11 +129,7 @@ A API estará disponível em:
 
 - [x] Testes unitários e e2e com Vitest
 - [x] ESLint + Husky + Lint-Staged
-- [ ] Pipeline com GitHub Actions (CI/CD)
-- [ ] Instrumentação de observabilidade:
-  - [ ] Logs estruturados
-  - [ ] Métricas
-  - [ ] Rastreamento (Tracing)
+- [x] Pipeline com GitHub Actions (CI/CD)
 
 #### 🔜 v0.0.3
 

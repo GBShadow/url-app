@@ -1,11 +1,9 @@
 import { StatusCodes } from 'http-status-codes';
-import { UrlRepository } from '../repositories/url.repository';
 import { ShowUrlDTO } from '../schema';
 import { AppError } from '@/errors/app-error';
+import { IUrlRepository } from '../interfaces/url-repository';
 
-export function ShowUrlService() {
-  const urlRepository = UrlRepository();
-
+export function ShowUrlService(urlRepository: IUrlRepository) {
   return {
     async execute(data: ShowUrlDTO & { userId: string }) {
       const url = await urlRepository.findById(data);

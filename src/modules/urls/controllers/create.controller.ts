@@ -1,10 +1,12 @@
+import { UrlRepository } from '../repositories/url.repository';
 import { CreateUrlDTO } from '../schema';
 import { CreateUrlService } from '../services/create.service';
 
 export function CreateUrlController() {
+  const urlRepository = UrlRepository();
+  const service = CreateUrlService(urlRepository);
   return {
     async execute(data: CreateUrlDTO & { userId: string }) {
-      const service = CreateUrlService();
       return service.execute(data);
     },
   };

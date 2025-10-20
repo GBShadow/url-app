@@ -16,18 +16,14 @@
 
 ---
 
-## [0.0.2] - _em desenvolvimento_
+## [0.0.2] - 2025-10-20
 
 ### 🔄 Melhoria contínua
 
 #### Previsto
 
+- Testes automatizados
 - CI/CD com GitHub Actions (testes automatizados, build)
-- Implementação de observabilidade:
-- Logs (ex: Pino, Winston)
-- Métricas (ex: Prometheus)
-- Rastreamento (ex: OpenTelemetry)
-- Ajustes de segurança e performance
 
 ---
 

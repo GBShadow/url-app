@@ -1,10 +1,8 @@
 import { StatusCodes } from 'http-status-codes';
-import { UrlRepository } from '../repositories/url.repository';
 import { AppError } from '@/errors/app-error';
+import { IUrlRepository } from '../interfaces/url-repository';
 
-export function RedirectUrlService() {
-  const urlRepository = UrlRepository();
-
+export function RedirectUrlService(urlRepository: IUrlRepository) {
   return {
     async execute(param: string) {
       const url = await urlRepository.findByParam(param);

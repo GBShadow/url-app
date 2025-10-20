@@ -6,13 +6,10 @@ import { FastifyTypedInstance } from './shared/types';
 import { StatusCodes } from 'http-status-codes';
 
 export function routes(app: FastifyTypedInstance) {
+  app.get('/health', async (_: FastifyRequest, reply: FastifyReply) => {
+    return reply.status(StatusCodes.OK).send();
+  });
   app.register(sessionRoutes);
   app.register(userRoutes);
   app.register(urlRoutes);
-  app.get('/hello', async () => {
-    return { message: 'Hello from Supertest' };
-  });
-  app.get('/health', async (_: FastifyRequest, reply: FastifyReply) => {
-    return reply.status(StatusCodes.NO_CONTENT).send();
-  });
 }

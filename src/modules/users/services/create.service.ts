@@ -1,12 +1,10 @@
 import { hash } from 'bcryptjs';
 import { StatusCodes } from 'http-status-codes';
-import { UserRepository } from '../repositories/user.repository';
 import { CreateUserDTO } from '../schema';
 import { AppError } from '@/errors/app-error';
+import { IUserRepository } from '../interfaces/user-repository';
 
-export function CreateUserService() {
-  const userRepository = UserRepository();
-
+export function CreateUserService(userRepository: IUserRepository) {
   return {
     async execute(data: CreateUserDTO) {
       const user = await userRepository.findByEmail(data.email);

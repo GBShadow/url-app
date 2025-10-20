@@ -1,9 +1,7 @@
-import { UrlRepository } from '../repositories/url.repository';
+import { IUrlRepository } from '../interfaces/url-repository';
 import { ListUrlDTO } from '../schema';
 
-export function ListUrlService() {
-  const urlRepository = UrlRepository();
-
+export function ListUrlService(urlRepository: IUrlRepository) {
   return {
     async execute(
       data: ListUrlDTO & {

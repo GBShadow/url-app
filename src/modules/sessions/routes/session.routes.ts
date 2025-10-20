@@ -34,7 +34,7 @@ export function sessionRoutes(app: FastifyTypedInstance) {
     },
     async (request, reply) => {
       const body = request.body;
-      const controller = CreateSessionController();
+      const controller = CreateSessionController(app.prisma);
       const session = await controller.execute(body);
       return reply.status(StatusCodes.CREATED).send(session);
     },

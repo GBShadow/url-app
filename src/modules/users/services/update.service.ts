@@ -1,12 +1,10 @@
 import { compare, hash } from 'bcryptjs';
 import { StatusCodes } from 'http-status-codes';
-import { UserRepository } from '../repositories/user.repository';
 import { CreateUserDTO } from '../schema';
 import { AppError } from '@/errors/app-error';
+import { IUserRepository } from '../interfaces/user-repository';
 
-export function UpdateUserService() {
-  const userRepository = UserRepository();
-
+export function UpdateUserService(userRepository: IUserRepository) {
   return {
     async execute(id: string, data: CreateUserDTO) {
       const user = await userRepository.findById(id, { omit: false });

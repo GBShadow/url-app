@@ -1,29 +1,15 @@
 import { StatusCodes } from 'http-status-codes';
-import { UrlRepository } from '../repositories/url.repository';
 import { CreateUrlDTO } from '../schema';
-import { env } from '@/env';
 import { AppError } from '@/errors/app-error';
-import { randomString } from '@/functions/utils';
+import { IUrlRepository } from '../interfaces/url-repository';
+import { generatedUrlHelper } from '../utils';
+import { Url } from '@prisma/client';
 
-export function CreateUrlService() {
-  const urlRepository = UrlRepository();
-
-  async function generatedUrlHelper(userId?: string) {
-    const param = randomString();
-    if (!userId) {
-      return `${env.DOMAIN}/${param}`;
-    }
-    const foundURL = await urlRepository.findByParam(param);
-
-    if (foundURL) {
-      generatedUrlHelper(userId);
-    }
-
-    return `${env.DOMAIN}/${param}`;
-  }
-
+export function CreateUrlService(urlRepository: IUrlRepository) {
   return {
-    async execute(data: CreateUrlDTO & { userId?: string }) {
+    async execute(
+      data: CreateUrlDTO & { userId?: string },
+    ): Promise<Url | { generatedUrl: string }> {
       if (!data.userId) {
         const generatedUrl = await generatedUrlHelper();
 
@@ -38,6 +24,7 @@ export function CreateUrlService() {
         baseUrl: data.baseUrl,
         userId: data.userId!,
       });
+
       if (url) {
         throw new AppError({
           code: 'duplicate.url',
@@ -46,7 +33,7 @@ export function CreateUrlService() {
         });
       }
 
-      const generatedUrl = await generatedUrlHelper();
+      const generatedUrl = await generatedUrlHelper(data.userId, urlRepository);
 
       return urlRepository.create({
         baseUrl: data.baseUrl,

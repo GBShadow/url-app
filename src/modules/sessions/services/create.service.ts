@@ -5,11 +5,9 @@ import { CreateSessionDTO } from '../schema';
 import { env } from '@/env';
 import { AppError } from '@/errors/app-error';
 import { convertBuffer } from '@/functions/utils';
-import { UserRepository } from '@/modules/users/repositories/user.repository';
+import { IUserRepository } from '@/modules/users/interfaces/user-repository';
 
-export function CreateSessionService() {
-  const userRepository = UserRepository();
-
+export function CreateSessionService(userRepository: IUserRepository) {
   return {
     async execute(data: CreateSessionDTO) {
       const user = await userRepository.findByEmail(data.email, {

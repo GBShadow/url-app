@@ -1,11 +1,9 @@
 import { StatusCodes } from 'http-status-codes';
-import { UrlRepository } from '../repositories/url.repository';
 import { DeleteUrlDTO } from '../schema';
 import { AppError } from '@/errors/app-error';
+import { IUrlRepository } from '../interfaces/url-repository';
 
-export function DeleteUrlService() {
-  const urlRepository = UrlRepository();
-
+export function DeleteUrlService(urlRepository: IUrlRepository) {
   return {
     async execute(data: DeleteUrlDTO) {
       const url = await urlRepository.findById(data);

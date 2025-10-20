@@ -1,16 +1,13 @@
 import { StatusCodes } from 'http-status-codes';
-import { UrlRepository } from '../repositories/url.repository';
 import { CreateUrlDTO } from '../schema';
-import { env } from '@/env';
 import { AppError } from '@/errors/app-error';
-import { randomString } from '@/functions/utils';
+import { IUrlRepository } from '../interfaces/url-repository';
+import { generatedUrlHelper } from '../utils';
 
-export function UpdateUrlService() {
-  const urlRepository = UrlRepository();
-
+export function UpdateUrlService(urlRepository: IUrlRepository) {
   return {
     async execute(id: string, data: CreateUrlDTO & { userId: string }) {
-      const url = await urlRepository.findById(id);
+      const url = await urlRepository.findById({ id, userId: data.userId });
 
       if (!url) {
         throw new AppError({
@@ -31,7 +28,7 @@ export function UpdateUrlService() {
         }
       }
 
-      const generatedUrl = `${env.DOMAIN}/${randomString()}`;
+      const generatedUrl = await generatedUrlHelper(data.userId, urlRepository);
 
       return urlRepository.update(id, { ...data, generatedUrl });
     },

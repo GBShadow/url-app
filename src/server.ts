@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { fastifyCors } from '@fastify/cors';
 import fastifyJwt from '@fastify/jwt';
 import fastifySwagger from '@fastify/swagger';

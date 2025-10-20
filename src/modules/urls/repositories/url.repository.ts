@@ -8,8 +8,9 @@ import { db } from '@/database/prisma';
 import { env } from '@/env';
 import { calcPages } from '@/functions/pages';
 import { MAX_QUANTITY } from '@/shared/constants';
+import { IUrlRepository } from '../interfaces/url-repository';
 
-export function UrlRepository() {
+export function UrlRepository(): IUrlRepository {
   return {
     async findByParam(param: string) {
       return await db.url.findFirst({
@@ -100,7 +101,7 @@ export function UrlRepository() {
     },
 
     async delete(data: DeleteUrlDTO) {
-      return db.url.update({
+      await db.url.update({
         where: {
           id: data.id,
           userId: data.userId,

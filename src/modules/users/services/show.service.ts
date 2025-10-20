@@ -1,11 +1,9 @@
 import { StatusCodes } from 'http-status-codes';
-import { UserRepository } from '../repositories/user.repository';
 import { ShowUserDTO } from '../schema';
 import { AppError } from '@/errors/app-error';
+import { IUserRepository } from '../interfaces/user-repository';
 
-export function ShowUserService() {
-  const userRepository = UserRepository();
-
+export function ShowUserService(userRepository: IUserRepository) {
   return {
     async execute(data: ShowUserDTO) {
       const user = await userRepository.findById(data.id);
